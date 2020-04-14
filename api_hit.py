@@ -38,4 +38,5 @@ def add_loc():
     return d_name
 
 
-app.run()
+if __name__ == '__main__':
+    app.run()
