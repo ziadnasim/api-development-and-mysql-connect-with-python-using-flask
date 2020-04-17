@@ -48,7 +48,7 @@ def add_loc():
     d_longx = request.form['longx']
     myCursor.execute(
         "INSERT INTO donation (name, location, donation_address, donation_count, donation_amt, thana, lat, longx) VALUES (%s,%s,%s,%s,%s,%s,%s,%s)",
-        (d_name, d_loc, d_area, int(d_count), float(d_amt), d_thana, float(d_lat), float(d_longx)))
+        (d_name, d_loc, d_area, d_count, d_amt, d_thana, d_lat, d_longx))
     conn.commit()
     conn.close()
     return d_name
