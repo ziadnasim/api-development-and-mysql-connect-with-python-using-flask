@@ -36,8 +36,7 @@ def home1():
 
 @app.route('/add_location', methods=['POST'])
 def add_loc():
-    conn = pymysql.connect(host="remotemysql.com", user="u9PE2LncVJ", passwd="EDajKwnNsd", db="u9PE2LncVJ", charset='utf8mb4',
-                           cursorclass=pymysql.cursors.DictCurso)
+    conn = pymysql.connect(host="remotemysql.com", user="u9PE2LncVJ", passwd="EDajKwnNsd", db="u9PE2LncVJ")
     myCursor = conn.cursor()
     d_name = request.form['name']
     d_loc = request.form['location']
