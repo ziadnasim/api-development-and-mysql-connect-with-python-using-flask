@@ -14,23 +14,24 @@ def home():
 
 @app.route('/locations', methods=['GET'])
 def home1():
-    #conn = pymysql.connect(host="64.188.2.228", user="odvutcom_apiTest", passwd="remoteTest123!@#", db="odvutcom_apiTest")
-    #conn = pymysql.connect(host="64.188.2.228", user="odvutcom_apiTest", passwd="remoteTest123!@#", db="odvutcom_apiTest")
-    #conn = pymysql.connect(host="remotemysql.com", user="u9PE2LncVJ", passwd="EDajKwnNsd",db="u9PE2LncVJ")
-    conn = pymysql.connect(host="localhost", user="root", passwd="", db="api",charset='utf8mb4',
-                           cursorclass=pymysql.cursors.DictCursor)
-    cursor = conn.cursor()
-    cursor.execute("SELECT * FROM donation")
-    result = cursor.fetchall()
-    conn.close()
-    return jsonify(result)
+    conn = pymysql.connect(host="remotemysql.com", user="u9PE2LncVJ", passwd="EDajKwnNsd", db="u9PE2LncVJ")
+    myCursor = conn.cursor()
+    myCursor.execute('select * from donation')
+    result = myCursor.fetchall()
+    data = []
+
+    for item in result:
+        entry = {
+            'name': item[0],
+            'address': item[1],
+            'latitude': item[2]}
+        data.append(entry)
+    return jsonify(data)
 
 @app.route('/add_location', methods=['POST'])
 def add_loc():
-    #conn = pymysql.connect(host="64.188.2.228", user="odvutcom_apiTest", passwd="remoteTest123!@#", db="odvutcom_apiTest")
-    ##conn = pymysql.connect(host="remotemysql.com", user="u9PE2LncVJ", passwd="EDajKwnNsd",db="u9PE2LncVJ")
-    conn = pymysql.connect(host="localhost", user="root", passwd="", db="api", charset='utf8mb4',
-                           cursorclass=pymysql.cursors.DictCursor)
+    conn = pymysql.connect(host="remotemysql.com", user="u9PE2LncVJ", passwd="EDajKwnNsd", db="u9PE2LncVJ", charset='utf8mb4',
+                           cursorclass=pymysql.cursors.DictCurso)
     myCursor = conn.cursor()
     d_name = request.form['name']
     d_loc = request.form['location']
