@@ -16,9 +16,10 @@ def home():
 def home1():
     conn = pymysql.connect(host="remotemysql.com", user="u9PE2LncVJ", passwd="EDajKwnNsd", db="u9PE2LncVJ", charset='utf8mb4',
                            cursorclass=pymysql.cursors.DictCurso)
-    myCursor = conn.cursor()
-    myCursor.execute('select * from donation')
-    result = myCursor.fetchall()
+    cursor = conn.cursor()
+    cursor.execute("SELECT * FROM donation")
+    result = cursor.fetchall()
+    conn.close()
     return jsonify(result)
 
 @app.route('/add_location', methods=['POST'])
