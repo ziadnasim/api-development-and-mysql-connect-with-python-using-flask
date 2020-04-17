@@ -14,13 +14,25 @@ def home():
 
 @app.route('/locations', methods=['GET'])
 def home1():
-    conn = pymysql.connect(host="remotemysql.com", user="u9PE2LncVJ", passwd="EDajKwnNsd", db="u9PE2LncVJ", charset='utf8mb4',
-                           cursorclass=pymysql.cursors.DictCurso)
-    cursor = conn.cursor()
-    cursor.execute("SELECT * FROM donation")
-    result = cursor.fetchall()
-    conn.close()
-    return jsonify(result)
+    conn = pymysql.connect(host="remotemysql.com", user="u9PE2LncVJ", passwd="EDajKwnNsd", db="u9PE2LncVJ")
+    myCursor = conn.cursor()
+    myCursor.execute('select * from donation')
+    result = myCursor.fetchall()
+    data = []
+
+    for item in result:
+        entry = {
+            'name': item[0],
+            'lcoation': item[1],
+            'donation_address': item[2],
+            'donation_count': item[3],
+            'donation_amount': item[4],
+            'thana': item[5],
+            'lat': item[6],
+            'longx': item[7],
+        }
+        data.append(entry)
+    return jsonify(data)
 
 @app.route('/add_location', methods=['POST'])
 def add_loc():
