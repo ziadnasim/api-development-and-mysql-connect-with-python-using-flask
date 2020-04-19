@@ -16,20 +16,20 @@ def home():
 def home1():
     conn = pymysql.connect(host="remotemysql.com", user="u9PE2LncVJ", passwd="EDajKwnNsd", db="u9PE2LncVJ")
     myCursor = conn.cursor()
-    myCursor.execute('select name, location, donation_address, donation_count, donation_amt, thana, lat, longx from donation')
+    myCursor.execute('select * from donation')
     result = myCursor.fetchall()
-    data = []
 
+    data = []
     for item in result:
         entry = {
             'name': item[1],
-            'lcoation': item[2],
+            'location': item[2],
             'donation_address': item[3],
             'donation_count': item[4],
-            'donation_amount': item[5],
+            'donation_amt': item[5],
             'thana': item[6],
             'lat': item[7],
-            'longx': item[8],
+            'longx': item[8]
         }
         data.append(entry)
     return jsonify(data)
