@@ -10,13 +10,13 @@ app.config["DEBUG"] = True
 
 @app.route('/', methods=['GET'])
 def home():
-    return "<h1>Distant Reading Archive</h1><p>This site is a prototype API for distant reading of science fiction novels.</p>"
+    return "<h1>The Crazy Ones</h1><p>This site is a prototype API by The Crazy Ones.</p>"
 
 @app.route('/locations', methods=['GET'])
 def home1():
     conn = pymysql.connect(host="remotemysql.com", user="u9PE2LncVJ", passwd="EDajKwnNsd", db="u9PE2LncVJ")
     myCursor = conn.cursor()
-    myCursor.execute('select * from donation')
+    myCursor.execute('select name, location, donation_address, donation_count, donation_amt, thana, lat, long from donation')
     result = myCursor.fetchall()
 
     data = []
