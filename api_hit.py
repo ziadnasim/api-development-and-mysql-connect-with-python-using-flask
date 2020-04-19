@@ -16,7 +16,7 @@ def home():
 def home1():
     conn = pymysql.connect(host="remotemysql.com", user="u9PE2LncVJ", passwd="EDajKwnNsd", db="u9PE2LncVJ")
     myCursor = conn.cursor()
-    myCursor.execute('select name, location, donation_address, donation_count, donation_amt, thana, lat, longx from donation')
+    myCursor.execute('select * from donation')
     result = myCursor.fetchall()
 
     data = []
