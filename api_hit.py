@@ -4,16 +4,19 @@ import flask
 import json
 from flask import jsonify
 import pymysql.cursors
-from flask_cors import CORS
+from flask_cors import CORS, cross_origin
 
 app = flask.Flask(__name__)
 app.config["DEBUG"] = True
 CORS(app)
 
+
 @app.route('/', methods=['GET'])
 def home():
     return "<h1>The Crazy Ones</h1><p>This site is a prototype API by The Crazy Ones.</p>"
 
+
+@cross_origin()
 @app.route('/locations', methods=['GET'])
 def home1():
     conn = pymysql.connect(host="remotemysql.com", user="u9PE2LncVJ", passwd="EDajKwnNsd", db="u9PE2LncVJ")
@@ -36,6 +39,8 @@ def home1():
         data.append(entry)
     return jsonify(data)
 
+
+@cross_origin()
 @app.route('/add_location', methods=['POST'])
 def add_loc():
     conn = pymysql.connect(host="remotemysql.com", user="u9PE2LncVJ", passwd="EDajKwnNsd", db="u9PE2LncVJ")
@@ -48,11 +53,13 @@ def add_loc():
     d_thana = request.form['thana']
     d_lat = request.form['lat']
     d_longx = request.form['longx']
-    myCursor.execute("INSERT INTO donation (name, location, donation_address, donation_count, donation_amt, thana, lat, longx) VALUES (%s,%s,%s,%s,%s,%s,%s,%s)",
+    myCursor.execute(
+        "INSERT INTO donation (name, location, donation_address, donation_count, donation_amt, thana, lat, longx) VALUES (%s,%s,%s,%s,%s,%s,%s,%s)",
         (d_name, d_loc, d_area, d_count, d_amt, d_thana, d_lat, d_longx))
     conn.commit()
     conn.close()
     return d_name
+
 
 if __name__ == '__main__':
     app.run()
