@@ -60,6 +60,5 @@ def add_loc():
     conn.close()
     return d_name
 
-
 if __name__ == '__main__':
     app.run()
