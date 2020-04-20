@@ -11,12 +11,13 @@ logging.getLogger('flask_cors').level = logging.DEBUG
 
 
 @app.route('/', methods=['GET'])
+@cross_origin()
 def home():
     return "<h1>The Crazy Ones</h1><p>This site is a prototype API by The Crazy Ones.</p>"
 
 
-@cross_origin()
 @app.route('/locations', methods=['GET'])
+@cross_origin()
 def home1():
     conn = pymysql.connect(host="remotemysql.com", user="u9PE2LncVJ", passwd="EDajKwnNsd", db="u9PE2LncVJ")
     myCursor = conn.cursor()
@@ -39,8 +40,8 @@ def home1():
     return jsonify(data)
 
 
-@cross_origin()
 @app.route('/add_location', methods=['POST'])
+@cross_origin()
 def add_loc():
     conn = pymysql.connect(host="remotemysql.com", user="u9PE2LncVJ", passwd="EDajKwnNsd", db="u9PE2LncVJ")
     myCursor = conn.cursor()
