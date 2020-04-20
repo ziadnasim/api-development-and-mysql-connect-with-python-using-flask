@@ -1,14 +1,13 @@
-from flask import request
+from flask import request, logging
 import pymysql
 import flask
-import json
 from flask import jsonify
 import pymysql.cursors
-from flask_cors import CORS, cross_origin
+from flask_cors import cross_origin
 
 app = flask.Flask(__name__)
 app.config["DEBUG"] = True
-CORS(app)
+logging.getLogger('flask_cors').level = logging.DEBUG
 
 
 @app.route('/', methods=['GET'])
